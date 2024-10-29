@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { firstName, lastName, email, password, avatar, phoneNumber } = req.body;
+    const { firstName, lastName, email, passwordHash, avatar, phoneNumber } = req.body;
 
     try {
       // Check if user with the email already exists
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       }
 
       // Hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(passwordHash, 10);
 
       // Create the new user
       const newUser = await prisma.user.create({
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
 
       res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (error) {
+      console.error("Error occurred during signup:", error);
       res.status(500).json({ message: 'Something went wrong', error });
     }
   } else {
