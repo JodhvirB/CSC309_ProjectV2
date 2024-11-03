@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { authenticateUser } from '@/middlware/auth';
+import { authenticateUser } from '@/middleware/auth';
 
 export default async function handler(req, res) {
     const user = await authenticateUser(req);
