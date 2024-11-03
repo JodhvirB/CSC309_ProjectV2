@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { authenticateUser } from '@/middlware/auth';
+import { authenticateUser } from '@/middleware/auth';
 
 const prisma = new PrismaClient();
 
