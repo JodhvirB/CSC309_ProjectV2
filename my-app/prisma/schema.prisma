@@ -24,6 +24,7 @@ model User {
   blogPosts    BlogPost[]
   comments     Comment[]
   reports      Report[]
+  votes        Vote[]    // New relation for votes
 }
 
 model Template {
@@ -58,7 +59,11 @@ model BlogPost {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   tags        Tag[] @relation("BlogPostTags") // Many-to-many relation to tags
+  upvotes     Int       @default(0)
+  downvotes   Int       @default(0)
+  votes       Vote[]    // New relation for votes
 }
+
 model Comment {
   id         Int      @id @default(autoincrement())
   content    String
@@ -70,6 +75,9 @@ model Comment {
   reports    Report[] // Reports associated with this comment
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  upvotes    Int      @default(0)
+  downvotes  Int      @default(0)
+  votes      Vote[]    // New relation for votes
 }
 
 
@@ -83,4 +91,18 @@ model Report {
   comment    Comment? @relation(fields: [commentId], references: [id])
   commentId  Int?     // Optional if the report is for a comment
   createdAt  DateTime @default(now())
+}
+
+model Vote {
+  id         Int      @id @default(autoincrement())
+  type       String   // "upvote" or "downvote"
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  blogPost   BlogPost? @relation(fields: [blogPostId], references: [id])
+  blogPostId Int?      // Optional if the vote is for a blog post
+  comment    Comment?  @relation(fields: [commentId], references: [id])
+  commentId  Int?      // Optional if the vote is for a comment
+  createdAt  DateTime  @default(now())
+
+  @@unique([userId, blogPostId, commentId]) // Ensures unique vote per user per item
 }
