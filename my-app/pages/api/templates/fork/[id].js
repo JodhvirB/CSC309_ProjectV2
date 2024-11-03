@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/utils/db';
 import { authenticateUser } from '@/middleware/auth';
 
 export default async function handler(req, res) {

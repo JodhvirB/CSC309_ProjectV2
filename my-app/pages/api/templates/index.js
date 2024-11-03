@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/utils/db';
 import { authenticateUser } from '@/middlware/auth';
 
-const prisma = new PrismaClient();
+
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
