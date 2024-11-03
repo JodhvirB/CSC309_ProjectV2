@@ -1,11 +1,14 @@
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import prisma from '@/utils/db';
 
-const prisma = new PrismaClient();
+import { hashPassword } from "@/utils/auth";
+
+
+
+
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { firstName, lastName, email, passwordHash, avatar, phoneNumber } = req.body;
+    const { firstName, lastName, email, password, avatar, phoneNumber } = req.body;
 
     try {
       // Check if user with the email already exists
@@ -14,11 +17,8 @@ export default async function handler(req, res) {
       });
 
       if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
+        return res.status(400).json({ message: 'This email is already taken' });
       }
-
-      // Hash the password
-      const hashedPassword = await bcrypt.hash(passwordHash, 10);
 
       // Create the new user
       const newUser = await prisma.user.create({
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
           firstName,
           lastName,
           email,
-          passwordHash: hashedPassword,  // Updated to match schema
+          passwordHash: await hashPassword(password),  // Updated to match schema
           avatar,
           phoneNumber,
         },
