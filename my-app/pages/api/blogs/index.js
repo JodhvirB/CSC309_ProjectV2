@@ -50,7 +50,7 @@ async function handleCreateBlogPost(req, res, user) {
 
 // Retrieve blog posts with optional search and pagination
 async function handleGetBlogPosts(req, res) {
-  const { page = 1, limit = 10, search = '' } = req.query;
+  const { page = 1, limit = 10, search = '', sort = 'date' } = req.query;
   const skip = (page - 1) * limit;
 
   try {
@@ -71,6 +71,9 @@ async function handleGetBlogPosts(req, res) {
       take: parseInt(limit),
       orderBy: { createdAt: 'desc' },
     });
+    if (sort === 'rating') {
+      blogPosts.sort((a, b) => (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes));
+    }
 
     res.status(200).json(blogPosts);
   } catch (error) {
