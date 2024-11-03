@@ -1,5 +1,5 @@
 import prisma from '@/utils/db';
-import { authenticateUser } from '@/middlware/auth';
+import { authenticateUser } from '@/middleware/auth';
 
 
 
