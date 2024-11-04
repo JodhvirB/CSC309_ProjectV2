@@ -56,6 +56,7 @@ model BlogPost {
   templates   Template[] // Adjusted relation field
   comments    Comment[] // Comments associated with this post
   reports     Report[]  // Reports for inappropriate content
+  hidden      Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   tags        Tag[] @relation("BlogPostTags") // Many-to-many relation to tags
@@ -73,6 +74,7 @@ model Comment {
   blogPostId Int
   parentId   Int?     // Optional parent comment ID for replies
   reports    Report[] // Reports associated with this comment
+  hidden     Boolean  @default(false) // New field
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   upvotes    Int      @default(0)
