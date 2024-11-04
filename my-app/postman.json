@@ -1,0 +1,984 @@
+{
+  "info": {
+    "_postman_id": "91f9ccb1-62e0-48cd-b5ab-ebe5f6ebd31d",
+    "name": "CSC309 Project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39463023",
+    "_collection_link": "https://csc309-project-7364.postman.co/workspace/d71def06-ef00-466a-8c02-ca48807fe4c2/collection/39348646-91f9ccb1-62e0-48cd-b5ab-ebe5f6ebd31d?action=share&source=collection_link&creator=39463023"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"user@user.com\",\n    \"password\": \"password\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "users",
+            "login"
+          ]
+        },
+        "description": "### Login User\n\nThis endpoint allows users to log in by providing their email and password.\n\n#### Request Body\n\n- `email` (string): The email of the user.\n    \n- `password` (string): The password of the user.\n    \n\n#### Response\n\nThe response will include the user's authentication token and other relevant user information."
+      },
+      "response": []
+    },
+    {
+      "name": "Execute_Code",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"#include <stdio.h>\\nint main() { char input[100]; fgets(input, sizeof(input), stdin); printf(\\\"Hello, %s!\\\\n\\\", input); return 0; }\",\n  \"language\": \"c\",\n  \"input\": \"C Programmer\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/code/executeCode?Content-Type=application/json",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "code",
+            "executeCode"
+          ],
+          "query": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "description": "This API endpoint allows users to execute a snippet of code in a specified programming language. It accepts the code, language, and any required input as parameters, and returns the output or error message based on the execution. This endpoint is useful for evaluating code snippets dynamically across different languages, including C, C++, Java, Python, and JavaScript."
+      },
+      "response": [
+        {
+          "name": "Python",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"input_text = input(); print(f\\\"Hello, {input_text}!\\\")\",\n    \"language\": \"python\",\n    \"input\": \"Python Programmer\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/code/executeCode?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "code",
+                "executeCode"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Javascript",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"const readline = require(\\\"readline\\\").createInterface({ input: process.stdin, output: process.stdout }); readline.question(\\\"\\\", input => { console.log(`Hello, ${input}!`); readline.close(); });\",\n    \"language\": \"javascript\",\n    \"input\": \"JavaScript Developer\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/code/executeCode?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "code",
+                "executeCode"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Java",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"public class HelloWorld { public static void main(String[] args) { java.util.Scanner scanner = new java.util.Scanner(System.in); String input = scanner.nextLine(); System.out.println(\\\"Hello, \\\" + input + \\\"!\\\"); } }\",\n    \"language\": \"java\",\n    \"input\": \"Java Enthusiast\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/code/executeCode?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "code",
+                "executeCode"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"print(1 / 0)\",\n    \"language\": \"python\",\n    \"input\": \"\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/code/executeCode?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "code",
+                "executeCode"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "CreateBlogPost",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"New Blog Post\",\n  \"description\": \"This is the description of the blog post.\",\n  \"tags\": [\"tag1\", \"tag2\"],\n  \"templateIds\": [1, 2]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/blogs?Content-Type=application/json",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "blogs"
+          ],
+          "query": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CreateBlogPost2",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"New Blog Post 2\",\n  \"description\": \"This is the description of the blog post select.\",\n  \"tags\": [\"tag1\", \"tag2\"],\n  \"templateIds\": [1, 2]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "blogs"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "CreateBlogPost3",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"For deletion\",\n  \"description\": \"This is the description\",\n  \"tags\": [\"tag1\", \"tag2\"],\n  \"templateIds\": [1, 2]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "blogs"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "UpdateBlogPost1",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Blog Post Title\",\n  \"description\": \"This is the updated description of the blog post.\",\n  \"tags\": [\"updatedTag1\", \"updatedTag2\"],\n  \"templateIds\": [1, 2]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs/1?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "blogs",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "DeleteBlogPost3",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs/3?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "blogs",
+                "3"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "UpvoteBlogPost1",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"type\": \"upvote\",\n  \"itemType\": \"blogPost\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/vote?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "vote"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "DownVoteBlogPost2",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 2,\n  \"type\": \"downvote\",\n  \"itemType\": \"blogPost\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/vote?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "vote"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "SortingByDate",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs?Content-Type=application/json&search=select",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "blogs"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "search",
+                  "value": "select"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "CreateBlogPost",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"New Blog Post\",\n  \"description\": \"This is the description of the blog post.\",\n  \"tags\": [\"tag1\", \"tag2\"],\n  \"templateIds\": [1, 2]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/blogs?Content-Type=application/json&sort=rating",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "blogs"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "sort",
+                  "value": "rating"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{   \n    \"firstName\": \"csc\",\n    \"lastName\": \"309\",\n    \"email\": \"name@csc309.com\",\n    \"password\": \"password\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users/signup",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "users",
+            "signup"
+          ]
+        },
+        "description": "# User Signup\n\nThis endpoint allows users to sign up by providing their first name, last name, email, and password.\n\n## Request Body\n\n- `firstName` (string): The first name of the user.\n    \n- `lastName` (string): The last name of the user.\n    \n- `email` (string): The email address of the user.\n    \n- `password` (string): The password for the user account.\n    \n\n## Response\n\nUpon successful signup, the response will include the user's ID and a success message. If there is an error, the response will include an error message."
+      },
+      "response": []
+    },
+    {
+      "name": "CreateComments",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"content\": \"This is the first comment.\",\n  \"blogPostId\": 1,\n  \"parentId\" : null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/comments/create?Content-Type=application/json",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "comments",
+            "create"
+          ],
+          "query": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CreateComments2",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"This is the second comment.\",\n  \"blogPostId\": 1,\n  \"parentId\" : 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/comments/create?Content-Type=application/json",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "comments",
+                "create"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Create_Template",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoibmFtZUBjc2MzMDkuY29tIiwiaWF0IjoxNzMwNjg2OTAxLCJleHAiOjE3MzA2OTA1MDF9.EKaBkZcQezzNuRGdsIxEzuu51U-i8QKiLtdJhwOkais",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Sample Template\",\n  \"explanation\": \"This is a test template\",\n  \"tags\": [\"example\", \"test\"],\n  \"code\": \"print('Hello, world!')\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/templates",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "templates"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search_Template",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/templates/search?query=test",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "templates",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "test"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit_Template",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoibmFtZUBjc2MzMDkuY29tIiwiaWF0IjoxNzMwNjg2OTAxLCJleHAiOjE3MzA2OTA1MDF9.EKaBkZcQezzNuRGdsIxEzuu51U-i8QKiLtdJhwOkais",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Updated Title\",\n  \"code\": \"console.log('Updated Code');\",\n  \"explanation\": \"Updated explanation\",\n  \"tags\": [\"updated\", \"new\"]\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/templates/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "templates",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete_Template",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoibmFtZUBjc2MzMDkuY29tIiwiaWF0IjoxNzMwNjg2OTAxLCJleHAiOjE3MzA2OTA1MDF9.EKaBkZcQezzNuRGdsIxEzuu51U-i8QKiLtdJhwOkais",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/templates/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "templates",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Fork_Template",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoibmFtZUBjc2MzMDkuY29tIiwiaWF0IjoxNzMwNjg2OTAxLCJleHAiOjE3MzA2OTA1MDF9.EKaBkZcQezzNuRGdsIxEzuu51U-i8QKiLtdJhwOkais",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/templates/fork/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "templates",
+            "fork",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Submit_Report",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoibmFtZUBjc2MzMDkuY29tIiwiaWF0IjoxNzMwNjg2OTAxLCJleHAiOjE3MzA2OTA1MDF9.EKaBkZcQezzNuRGdsIxEzuu51U-i8QKiLtdJhwOkais",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Inappropriate content\",\n  \"blogPostId\": 1,\n  \"commentId\": null\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/reports/create",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "reports",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View_Reports",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MzA2ODg2OTUsImV4cCI6MTczMDY5MjI5NX0.g-UpP1Z1S0I5CR2Tg6YjlvyBpHZOKJxv62sDff4OHTo",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/reports",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "reports"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "HIde_Reports",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MzA2ODg2OTUsImV4cCI6MTczMDY5MjI5NX0.g-UpP1Z1S0I5CR2Tg6YjlvyBpHZOKJxv62sDff4OHTo",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"commentId\": 2\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/reports/hide",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "reports",
+            "hide"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

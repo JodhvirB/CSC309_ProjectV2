@@ -1,0 +1,275 @@
+Model Descriptions
+User
+Stores information about each user, including email, password hash, personal details (first and last name, avatar, optional phone number), and role (defaulting to “USER”). Each user can create templates, blog posts, comments, reports, and votes.
+Template
+Represents code snippets or templates, with fields for title, code, and an optional explanation. Each template is associated with a user and can be linked to multiple blog posts and tags.
+Tag
+Tags are unique labels used to categorize blog posts and templates. They establish many-to-many relationships with both templates and blog posts.
+BlogPost
+Contains information for each blog post, including title, description, associated user, comments, tags, and optional templates. Blog posts can be reported, hidden (if inappropriate), and support upvotes, downvotes, and user-specific votes.
+Comment
+Represents comments on blog posts, with fields for content, the user who posted it, the associated blog post, and optional parent comment ID for replies. Comments support reports, upvotes, downvotes, and can be hidden by admins.
+Report
+Tracks reports on blog posts or comments for inappropriate content. It stores the reporting user, reason, and timestamp. Each report is associated with either a blog post or a comment.
+Vote
+Manages user votes (upvote or downvote) on blog posts or comments. Ensures a unique vote per user per item, storing the user, type, and timestamp for each vote.
+Blog API
+Endpoints
+Create Blog Post
+URL: /api/blogs
+Method: POST
+Payload:
+json
+
+{
+  "title": "Example Blog Title",
+  "description": "Detailed blog post content...",
+  "tags": ["tag1", "tag2"],
+  "templateIds": [1, 2]
+}
+
+
+Response:
+json
+
+{
+  "message": "Blog post created successfully",
+  "blogPost": { /* Blog post data */ }
+}
+
+
+Retrieve Blog Posts
+URL: /api/blogs
+Method: GET
+Query Params: search, page, limit, sort (e.g., ?search=example&page=1&limit=10&sort=rating)
+Response:
+json
+
+[
+  { /* Blog post data */ },
+  { /* Blog post data */ }
+]
+
+
+Edit Blog Post
+URL: /api/blogs/[id]
+Method: PUT
+Payload:
+json
+
+{
+  "title": "Updated Title",
+  "description": "Updated description..."
+}
+
+
+Response:
+json
+
+{ "message": "Blog post updated successfully" }
+
+
+Delete Blog Post
+URL: /api/blogs/[id]
+Method: DELETE
+Response:
+json
+
+{ "message": "Blog post deleted successfully" }
+
+
+Comment API
+Model Design: Comment
+Endpoints
+Create Comment
+URL: /api/comments/create
+Method: POST
+Payload:
+json
+
+{
+  "content": "Great post!",
+  "blogPostId": 1,
+  "parentId": null
+}
+
+
+Response:
+json
+
+{ "message": "Comment created successfully", "comment": { /* Comment data */ } }
+
+
+Retrieve Comments
+URL: /api/comments/search
+Method: GET
+Query Params: search, sort (e.g., ?search=helpful&sort=rating)
+Response:
+json
+
+[
+  { /* Comment data */ },
+  { /* Comment data */ }
+]
+
+
+Edit Comment
+URL: /api/comments/[id]/update
+Method: PUT
+Payload:
+json
+
+{ "content": "Updated comment text..." }
+
+
+Response:
+json
+
+{ "message": "Comment updated successfully" }
+
+
+Delete Comment
+URL: /api/comments/[id]/delete
+Method: DELETE
+Response:
+json
+
+{ "message": "Comment deleted successfully" }
+
+
+Report API
+Endpoints
+Create a Report
+URL: /api/reports/create
+Description: Allows a user to create a report for a blog post or comment due to inappropriate content.
+Method: POST
+Request Payload:
+json
+Copy code
+{
+  "reason": "Inappropriate content",
+  "blogPostId": 1
+}
+or
+json
+Copy code
+{
+  "reason": "Offensive language",
+  "commentId": 2
+}
+
+
+Response:
+Success:
+json
+Copy code
+{
+  "message": "Report created successfully",
+  "report": {
+    "id": 1,
+    "reason": "Inappropriate content",
+    "blogPostId": 1,
+    "createdAt": "2024-11-03T12:34:56Z"
+  }
+}
+
+
+Error (if neither blogPostId nor commentId is specified):
+json
+Copy code
+{ "message": "Specify either blogPostId or commentId to report content" }
+
+2. Retrieve Reported Content
+URL: /api/reports
+Description: Fetches a list of reported blog posts and comments for admin review.
+Method: GET
+Request Payload: None (requires admin authentication)
+Response:
+json
+Copy code
+{
+  "reportedPosts": [
+    {
+      "id": 1,
+      "title": "Sample Post",
+      "reports": [{ "reason": "Inappropriate content" }],
+      "user": { "firstName": "John", "lastName": "Doe", "avatar": "url" }
+    }
+  ],
+  "reportedComments": [
+    {
+      "id": 1,
+      "content": "Offensive comment",
+      "reports": [{ "reason": "Offensive language" }],
+      "user": { "firstName": "Jane", "lastName": "Doe", "avatar": "url" }
+    }
+  ]
+}
+
+
+Hide Reported Content
+URL: /api/reports/hide
+Description: Hides a reported blog post or comment.
+Method: PATCH
+Request Payload:
+json
+Copy code
+{ "blogPostId": 1 } or { "commentId": 1 }
+
+
+Response:
+json
+Copy code
+{ "message": "Content hidden successfully" }
+
+Vote API
+Votes
+Vote on Content
+URL: /api/votes
+Description: Casts an upvote or downvote on a blog post or comment, toggling the vote if it already exists.
+Method: POST
+Request Payload:
+json
+Copy code
+{ "id": 1, "type": "upvote", "itemType": "blogPost" }
+
+
+Response:
+New Vote:
+json
+Copy code
+{ "message": "Voted upvote", "vote": { "id": 1, "type": "upvote" } }
+
+
+Toggle Vote Off:
+json
+Copy code
+{ "message": "upvote removed" }
+
+
+Change Vote Type:
+json
+Copy code
+{ "message": "Vote changed to downvote" }
+
+
+Execute Code API:
+This API endpoint allows users to execute a snippet of code in a specified programming language. It accepts the code, language, and any required input as parameters, and returns the output or error message based on the execution. This endpoint is useful for evaluating code snippets dynamically across different languages, including C, C++, Java, Python, and JavaScript.
+{
+  "code": "#include <stdio.h>\nint main() { char input[100]; fgets(input, sizeof(input), stdin); printf(\"Hello, %s!\\n\", input); return 0; }",
+  "language": "c",
+  "input": "C Programmer"
+}
+
+Login Code API:
+Login User
+This endpoint allows users to log in by providing their email and password.
+Request Body
+email (string): The email of the user.
+password (string): The password of the user.
+Response
+The response will include the user's authentication token and other relevant user information.
+{
+    "email": "user@user.com",
+    "password": "password"
+}
