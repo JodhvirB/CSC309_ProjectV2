@@ -7,6 +7,22 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { firstName, lastName, email, password, avatar, phoneNumber } = req.body;
 
+     // Basic validations
+     if (!firstName || !lastName || !email || !password) {
+      return res.status(400).json({ message: 'All required fields must be provided' });
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: 'Invalid email format' });
+    }
+
+    // Password strength validation (example: minimum 8 characters)
+    if (password.length < 4) {
+      return res.status(400).json({ message: 'Password must be at least 4 characters long' });
+    }
+
     try { 
       // Check if user with the email already exists
       const existingUser = await prisma.user.findUnique({
