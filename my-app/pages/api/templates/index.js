@@ -29,7 +29,21 @@ export default async function handler(req, res) {
         } catch (error) {
             res.status(500).json({ message: "Error creating template", error });
         }
-    } else {
+    } else if (req.method === 'GET') {
+        const user = await authenticateUser(req);
+        if (!user) return res.status(401).json({ message: "Unauthorized" });
+
+        try {
+            const templates = await prisma.template.findMany({
+                where: { userId: user.id },
+                include: { tags: true },
+            });
+            res.status(200).json(templates);
+        } catch (error) {
+            res.status(500).json({ message: "Error retrieving templates", error });
+        }
+    }
+    else {
         res.setHeader('Allow', ['POST']);
         res.status(405).end('Method ${req.method} Not allowed')
     }
