@@ -3,14 +3,11 @@ import prisma from '@/utils/db';
 import { hashPassword } from "@/utils/auth";
 
 
-
-
-
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { firstName, lastName, email, password, avatar, phoneNumber } = req.body;
 
-    try {
+    try { 
       // Check if user with the email already exists
       const existingUser = await prisma.user.findUnique({
         where: { email },
