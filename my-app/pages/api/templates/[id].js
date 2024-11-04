@@ -7,8 +7,31 @@ export default async function handler(req, res) {
     if (!user) return res.status(401).json({ message: 'Unauthorized' });
 
     const { id } = req.query;
+    if (req.method === 'GET') {
+        try {
+            const template = await prisma.template.findUnique({
+                where: { id: Number(id) },
+                include: {
+                    tags: true,
+                    blogPosts: { 
+                        select: {
+                            id: true,
+                            title: true,
+                            description: true,
+                            createdAt: true,
+                            user: { select: { firstName: true, lastName: true, avatar: true } },
+                        },
+                    },
+                },
+            });
 
-    if (req.method === 'PUT') {
+            if (!template) return res.status(404).json({ message: 'Template not found' });
+            res.status(200).json(template);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving template', error });
+        }
+    }
+    else if (req.method === 'PUT') {
         const { title, code, explanation, tags } = req.body;
 
         try {
