@@ -70,3 +70,6 @@ EOF
 
 echo "Admin user created with email: $ADMIN_EMAIL and role: $ROLE."
 echo "Setup complete. Ready to start the application."
+
+
+# just a test
