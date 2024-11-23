@@ -43,6 +43,11 @@ export default async function handler(req, res) {
           avatar,
           phoneNumber,
         },
+        select: { // Select only required fields
+          firstName: true,
+          lastName: true,
+          avatar: true,
+        },
       });
 
       res.status(201).json({ message: 'User created successfully', user: newUser });

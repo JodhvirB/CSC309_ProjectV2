@@ -38,3 +38,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignore specific components and pages
+src/components/Footer.tsx
+src/components/Sidebar.tsx
+src/components/AvatarUploader.tsx
+src/components/UserProfile.tsx
+src/pages/settings/index.tsx
+
